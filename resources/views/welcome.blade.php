@@ -17,7 +17,9 @@
     </head>
     <body>
         <div class="container">
-            <h1> MAGAZ </h1>
-        </div>
+            @include('layouts.nav')
+        <main class="container">
+
+        </main
     </body>
 </html>
