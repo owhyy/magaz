@@ -17,7 +17,7 @@
                         required
                     />
                     <button type="submit" onclick="event.preventDefault()">Get my access link</button>
-                    <a href="/register">Create an account</a>
+                    <a href="register">Create an account</a>
                 </form>
             </div>
         </article>
