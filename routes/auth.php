@@ -9,5 +9,7 @@ Route::prefix('auth')->group(function() {
     ->name('login');
 
     Route::get('register', [RegisterController::class, 'create'])
-    ->name('register');
+    ->name('register')->middleware("web");
+
+    Route::post('register', [RegisterController::class, 'store'])->middleware("web");
 });
