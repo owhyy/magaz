@@ -6,7 +6,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function() {
     Route::get('login', [LoginController::class, 'create'])
-    ->name('login');
+    ->name('request-login');
+
+    Route::get('login/{token}', [LoginController::class, 'index'])
+        ->name('login');
+
+    Route::post('login', [LoginController::class, 'store']);
 
     Route::get('register', [RegisterController::class, 'create'])
     ->name('register')->middleware("web");

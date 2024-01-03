@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -31,7 +32,7 @@ class RegisterController extends Controller
             User::create([
                 'nickname' => $request->nickname,
                 'email' => $request->email,
-                'token' => Hash::make(Str::random(40)),
+                'token' => Crypt::encryptString(Str::random(40)),
                 'token_generated_at' => Date::now()
             ]);
         }

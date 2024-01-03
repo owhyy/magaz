@@ -7,16 +7,18 @@
                     <h2>Enter your email below, and, if an account associated with it exists, you will receive your
                         access link</h2>
                 </hgroup>
-                <form>
+                <form method="POST" action="{{ route("request-login") }}">
+                    @csrf
                     <input
                         type="email"
                         name="email"
                         placeholder="Email"
                         aria-label="Email"
                         autocomplete="email"
+                        value="{{ old('email') }}"
                         required
                     />
-                    <button type="submit" onclick="event.preventDefault()">Get my access link</button>
+                    <button type="submit">Get my access link</button>
                     <a href="{{ route('register') }}">Create an account</a>
                 </form>
             </div>
