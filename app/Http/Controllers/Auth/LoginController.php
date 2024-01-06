@@ -37,6 +37,7 @@ class LoginController extends Controller
         }
         return redirect(route('main'));
     }
+    
     public function delete(Request $request): RedirectResponse
     {
         Auth::logout();

@@ -12,7 +12,7 @@
 			{{ Auth::user()->nickname }}
 		    </summary>
 		    <ul dir="rtl">
-			<li><a href="{{ route('profile.edit') }}">View</a></li>
+			<li><a href="{{ route('profile.edit') }}">Manage profile</a></li>
 			<li><a href="{{ route('logout') }}">Log out</a></li>
 		    </ul>
 		</details>
