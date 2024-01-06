@@ -22,6 +22,6 @@
         </div>
         <main class="container">
             {{ $slot }}
-        </main
+        </main>
     </body>
 </html>

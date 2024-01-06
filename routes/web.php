@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -35,9 +36,7 @@ Route::prefix('auth')->group(function() {
     Route::get('logout', [LoginController::class, 'delete'])->name('logout');
 });
 
-Route::get('/', function () {
-    return view('main');
-})->name("main");
+Route::get('/', [AdController::class, 'index'])->name("main");
 
 Route::middleware('auth')->group(function() {
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
