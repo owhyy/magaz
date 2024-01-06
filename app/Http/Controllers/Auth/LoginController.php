@@ -16,9 +16,9 @@ class LoginController extends Controller
     public function index(Request $request): View
     {
         $user = User::whereToken($request->token)->first();
-        error_log($user);
-        
-        return view('auth.login');
+        if ($user === null)
+            return view('auth.err.user-not-found');
+         return view('auth.login');
     }
 
     public function create(): View
