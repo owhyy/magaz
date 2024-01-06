@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -36,6 +35,15 @@ class LoginController extends Controller
             $user->update(['token' => Str::random(40)]);
             RequestedLogin::dispatch($user);
         }
+        return redirect(route('main'));
+    }
+    public function delete(Request $request): RedirectResponse
+    {
+        Auth::logout();
+
+        $request->session->invalidate();
+        $request->session->regenerateToken();
+        
         return redirect(route('main'));
     }
 }

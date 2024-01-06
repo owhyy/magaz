@@ -31,6 +31,8 @@ Route::prefix('auth')->group(function() {
     ->name('register')->middleware("web");
 
     Route::post('register', [RegisterController::class, 'store'])->middleware("web");
+
+    Route::get('logout', [LoginController::class, 'delete'])->name('logout');
 });
 
 Route::get('/', function () {

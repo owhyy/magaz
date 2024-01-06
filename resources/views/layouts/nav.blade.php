@@ -5,7 +5,18 @@
     <ul>
 
 	@if (Auth::check())
-	    <li><a href="{{ route('profile.edit') }}">My profile</a></li>
+	    <li><a href="{{ route('profile.edit') }}"></a></li>
+	    <li>
+		<details class="dropdown">
+		    <summary>
+			{{ Auth::user()->nickname }}
+		    </summary>
+		    <ul dir="rtl">
+			<li><a href="{{ route('profile.edit') }}">View</a></li>
+			<li><a href="{{ route('logout') }}">Log out</a></li>
+		    </ul>
+		</details>
+	    </li>
 	@else
 	    @if (request()->route()->getName() !== 'login')
 		<li><a href="{{ route('login') }}">Log In</a></li>
