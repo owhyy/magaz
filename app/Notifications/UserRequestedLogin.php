@@ -7,8 +7,9 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
 
-class LoginLink extends Notification
+class UserRequestedLogin extends Notification
 {
     use Queueable;
 
@@ -36,9 +37,9 @@ class LoginLink extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject("Account successfully created!")
-            ->greeting("Hi {$this->user->nickname}, your account has been successfully created! Please use the link below to log in.")
-            ->line(url("login", ['token' => Crypt::decryptString($this->user->token)]))
+            ->subject("Login link!")
+            ->greeting("Hi {$this->user->nickname}, please use the link below to log in.")
+            ->line(route("login", ['token' => $this->user->token]))
             ->line('Thank you for using our application!');
     }
 

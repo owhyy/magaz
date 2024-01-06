@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nickname', 25)->unique();
             $table->string('email')->unique();
             $table->timestamp('token_generated_at')->nullable();
-            $table->string('token');
+            $table->string('token', 256);
             $table->rememberToken();
             $table->timestamps();
         });

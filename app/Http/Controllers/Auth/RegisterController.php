@@ -32,7 +32,7 @@ class RegisterController extends Controller
             User::create([
                 'nickname' => $request->nickname,
                 'email' => $request->email,
-                'token' => Crypt::encryptString(Str::random(40)),
+                'token' => Str::random(40),
                 'token_generated_at' => Date::now()
             ]);
         }

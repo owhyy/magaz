@@ -2,11 +2,11 @@
 
 namespace App\Listeners;
 
-use App\Events\RequestedLogin;
-use App\Notifications\UserRequestedLogin;
+use App\Events\Registered;
+use App\Notifications\UserRegistered;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendLoginLink implements ShouldQueue
+class SendRegisteredNotification implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -19,8 +19,8 @@ class SendLoginLink implements ShouldQueue
     /**
      * Handle the event.
      */
-    public function handle(RequestedLogin $event): void
+    public function handle(Registered $event): void
     {
-        $event->user->notify(new UserRequestedLogin($event->user));
+        $event->user->notify(new UserRegistered($event->user));
     }
 }

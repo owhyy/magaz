@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\Registered;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -39,6 +40,9 @@ class User extends Authenticatable
      */
     protected $casts = [
         'token_generated_at' => 'datetime',
-        'token' => 'hashed',
+    ];
+
+    protected $dispatchesEvents = [
+        'created' => Registered::class,
     ];
 }
