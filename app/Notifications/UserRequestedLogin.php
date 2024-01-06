@@ -39,7 +39,7 @@ class UserRequestedLogin extends Notification
         return (new MailMessage)
             ->subject("Login link!")
             ->greeting("Hi {$this->user->nickname}, please use the link below to log in.")
-            ->line(route("login", ['token' => $this->user->token]))
+            ->line(route("login.do", ['token' => $this->user->token]))
             ->line('Thank you for using our application!');
     }
 

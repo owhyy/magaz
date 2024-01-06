@@ -7,7 +7,7 @@
                     <h2>Enter your email below, and, if an account associated with it exists, you will receive your
                         access link</h2>
                 </hgroup>
-                <form method="POST" action="{{ route("request-login") }}">
+                <form method="POST" action="{{ route("login") }}">
                     @csrf
                     <input
                         type="email"

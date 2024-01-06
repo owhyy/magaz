@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -18,7 +19,9 @@ class LoginController extends Controller
         $user = User::whereToken($request->token)->first();
         if ($user === null)
             return view('auth.err.user-not-found');
-         return view('auth.login');
+
+        Auth::login($user);
+        return view('main', ['user' => $user]);
     }
 
     public function create(): View

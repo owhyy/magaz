@@ -39,7 +39,7 @@ class UserRegistered extends Notification
             ->subject("Account successfully created!")
             ->greeting("Hi {$this->user->nickname}, your account has been successfully created! Please use the link below to log in.")
             // TODO: this should be encoded
-            ->line(url("login", ['token' => $this->user->token])) 
+            ->line(url("login.do", ['token' => $this->user->token])) 
             ->line('Thank you for using our application!');
     }
 
