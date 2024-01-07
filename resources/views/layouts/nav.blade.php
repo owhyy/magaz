@@ -21,6 +21,9 @@
 	    @if (request()->route()->getName() !== 'login')
 		<li><a href="{{ route('login') }}">Log In</a></li>
 	    @endif
+	    @if (request()->route()->getName() !== 'register')
+		<li><a href="{{ route('register') }}">Register</a></li>
+	    @endif
 	@endif
     </ul>
 </nav>
