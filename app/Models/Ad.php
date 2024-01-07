@@ -15,6 +15,7 @@ class Ad extends Model
         'description',
         'thumbnail',
         'price',
+        'views',
     ];
 
     public function user(): BelongsTo
