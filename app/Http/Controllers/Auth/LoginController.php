@@ -13,14 +13,15 @@ use Illuminate\View\View;
 
 class LoginController extends Controller
 {
-    public function index(Request $request): View
+    public function index(Request $request): RedirectResponse
     {
         $user = User::whereToken($request->token)->first();
+
         if ($user === null)
             return view('auth.err.user-not-found');
 
         Auth::login($user);
-        return view('main', ['user' => $user]);
+        return redirect(route('main'));
     }
 
     public function create(): View

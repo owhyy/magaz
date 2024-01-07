@@ -3,21 +3,13 @@
 	<input type="search" placeholder="Search for a product" />
 	<input type="submit" value="Search" />
     </form>
-    <div style="display: grid; grid-template-columns: 3fr 1fr; grid-template-rows: repeat(1, 1fr);">
-	    <div>
-		<ul>
-		    @foreach ( $ads as $ad)
-			<li>{{ $ad['title'] }}</li>
-		    @endforeach
-		</ul>
-	    </div>
-	    <!-- TODO: this will be the category table someday -->
-	    <div>
-		<ul>
-		    @foreach ( $ads as $ad)
-			<li>{{ $ad['title'] }}</li>
-		    @endforeach
-		</ul>
-	    </div>
-	</div>
+    <div class="grid" style="display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr;">
+	@foreach ( $ads as $ad)
+	    <article style="margin-top: 3em; padding-top: 0; padding-bottom: 1em;">
+		<header style="padding-top: 0; padding-bottom: 1em;"><b><a href="{{ route('ads.get', ['id' => $ad->id]) }}"> {{ $ad->title }}</a> </b></header>
+		{{ $ad->thumbnail }}
+		<span style="color: #424751;"><i>{{ $ad->description }}</i></span> </br> {{ $ad->price }}$
+	    </article>
+	@endforeach
+    </div>
 </x-app-layout>

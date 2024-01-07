@@ -12,18 +12,7 @@ class AdController extends Controller
      */
     public function index()
     {
-        return view('ads.index', ['ads' => [
-            ['title' => 'joe'],
-            ['title' => 'joe'],	    
-            ['title' => 'joe'],	    
-            ['title' => 'joe'],	    
-            ['title' => 'joe'],	    
-            ['title' => 'joe'],	    
-            ['title' => 'joe'],	    
-            ['title' => 'joe'],	    
-            ['title' => 'joe'],	    
-            ['title' => 'joe'],	    
-            ]]);
+        return view('ads.index', ['ads' => Ad::all()]);
     }
 
     /**
@@ -45,9 +34,9 @@ class AdController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Ad $ad)
+    public function show(int $id)
     {
-        //
+        error_log(Ad::findOrFail($id));        
     }
 
     /**
