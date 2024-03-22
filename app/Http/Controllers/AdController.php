@@ -50,6 +50,7 @@ class AdController extends Controller
     {
         $ad = Ad::findOrFail($id);
         $ad->updateOrFail(['views' => $ad->views + 1]);
+
         return view('ads.get', ['ad' => $ad]);
     }
 

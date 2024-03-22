@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Crypt;
 
 class UserRegistered extends Notification
 {
@@ -36,10 +35,10 @@ class UserRegistered extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject("Account successfully created!")
+            ->subject('Account successfully created!')
             ->greeting("Hi {$this->user->nickname}, your account has been successfully created! Please use the link below to log in.")
             // TODO: this should be encoded
-            ->line(url("login.do", ['token' => $this->user->token])) 
+            ->line(url('login.do', ['token' => $this->user->token]))
             ->line('Thank you for using our application!');
     }
 

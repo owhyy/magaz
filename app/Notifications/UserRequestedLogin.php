@@ -6,8 +6,6 @@ use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Str;
 
 class UserRequestedLogin extends Notification
 {
@@ -37,9 +35,9 @@ class UserRequestedLogin extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject("Login link!")
+            ->subject('Login link!')
             ->greeting("Hi {$this->user->nickname}, please use the link below to log in.")
-            ->line(route("login.do", ['token' => $this->user->token]))
+            ->line(route('login.do', ['token' => $this->user->token]))
             ->line('Thank you for using our application!');
     }
 
