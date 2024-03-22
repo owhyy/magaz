@@ -17,10 +17,12 @@ class LoginController extends Controller
     {
         $user = User::whereToken($request->token)->first();
 
-        if ($user === null)
+        if ($user === null) {
             return view('auth.err.user-not-found');
+        }
 
         Auth::login($user);
+
         return redirect(route('main'));
     }
 
@@ -36,16 +38,17 @@ class LoginController extends Controller
             $user->update(['token' => Str::random(40)]);
             RequestedLogin::dispatch($user);
         }
+
         return redirect(route('main'));
     }
-    
+
     public function delete(Request $request): RedirectResponse
     {
         Auth::logout();
 
         $request->session->invalidate();
         $request->session->regenerateToken();
-        
+
         return redirect(route('main'));
     }
 }

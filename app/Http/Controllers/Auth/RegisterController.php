@@ -6,9 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Date;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -28,12 +26,12 @@ class RegisterController extends Controller
 
         // check if email is unique,
         // but don't display any error message to avoid phishing
-        if (!User::where('email', $request->email)->exists()) {
+        if (! User::where('email', $request->email)->exists()) {
             User::create([
                 'nickname' => $request->nickname,
                 'email' => $request->email,
                 'token' => Str::random(40),
-                'token_generated_at' => Date::now()
+                'token_generated_at' => Date::now(),
             ]);
         }
 
