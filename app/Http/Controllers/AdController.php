@@ -29,18 +29,12 @@ class AdController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required|max:255',
-            'price' => 'required',
-        ]);
-
-        $ad_data = $request->all();
-        $ad_data['user_id'] = $request->user()->id;
-        error_log(json_encode($ad_data));
-        Ad::create($ad_data);
-        return redirect()->route('main')
-            ->with('success','Ad created successfully.', ['ads' => Ad::all()]);
+        $request->validate(['title' => 'required|max:255',
+                'description' => 'required',
+                'price' => 'required']
+        );
+        Ad::create($request->all() + ['user_id' => $request->user()->id]);
+        return redirect()->route('ads.index')->with('success', 'Ad created successfuly.');
     }
 
     /**

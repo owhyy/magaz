@@ -15,11 +15,7 @@ class LoginController extends Controller
 {
     public function index(Request $request): RedirectResponse
     {
-        $user = User::whereToken($request->token)->first();
-
-        if ($user === null) {
-            return view('auth.err.user-not-found');
-        }
+        $user = User::whereToken($request->token)->firstOrFail();
 
         Auth::login($user);
 
@@ -34,20 +30,20 @@ class LoginController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $user = User::whereEmail($request->email)->first();
-        if ($user->exists) {
+        if ($user && $user->exists) {
             $user->update(['token' => Str::random(40)]);
             RequestedLogin::dispatch($user);
         }
 
-        return redirect(route('main'));
+        return redirect()->route('main')->with('success', 'User created successfuly');
     }
 
     public function delete(Request $request): RedirectResponse
     {
         Auth::logout();
 
-        $request->session->invalidate();
-        $request->session->regenerateToken();
+        $request->getSession()->invalidate();
+        $request->getSession()->regenerateToken();
 
         return redirect(route('main'));
     }
