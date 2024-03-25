@@ -21,7 +21,7 @@ class AdController extends Controller
      */
     public function create()
     {
-        //
+        return view('ads.create');
     }
 
     /**
@@ -29,7 +29,12 @@ class AdController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(['title' => 'required|max:255',
+                'description' => 'required',
+                'price' => 'required']
+        );
+        Ad::create($request->all() + ['user_id' => $request->user()->id]);
+        return redirect()->route('ads.index')->with('success', 'Ad created successfuly.');
     }
 
     /**
