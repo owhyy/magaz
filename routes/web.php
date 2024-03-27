@@ -27,22 +27,21 @@ Route::prefix('auth')->group(function () {
     Route::post('login', [LoginController::class, 'store']);
 
     Route::get('register', [RegisterController::class, 'create'])
-        ->name('register')->middleware('web');
+        ->name('register');
 
-    Route::post('register', [RegisterController::class, 'store'])->middleware('web');
+    Route::post('register', [RegisterController::class, 'store']);
 
     Route::get('logout', [LoginController::class, 'delete'])->name('logout');
 });
 
-Route::get('/', [AdController::class, 'index'])->name('main');
+Route::get('/', AdController::class . '@index')->name('main');
 Route::prefix('ads')->group(function () {
-    Route::get('/{id}', [AdController::class, 'show'])->name('ads.get');
+    Route::get('/create', AdController::class . '@create')->name('ads.create')->middleware('auth');
+    Route::get('/{id}', AdController::class . '@show')->name('ads.get');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
-});
 
+Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit') ->middleware('auth');
 Route::get('profile/{nickname}', [ProfileController::class, 'show'])->name('profile.get');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
