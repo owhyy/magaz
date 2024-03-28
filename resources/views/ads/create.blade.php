@@ -2,7 +2,7 @@
     <div class="container" style="width: 50%">
         <article>
             <h1>Post a new ad</h1>
-            <form action="{{ route('ads.create') }}" method="post">
+            <form action="{{ route('ads.store') }}" method="post">
                 @csrf
                 <fieldset>
                     <label>
@@ -39,14 +39,28 @@
 
                         </select>
                     </label>
-{{-- TODO --}}
-{{--                    <label x-data="{ files: null }">--}}
-{{--                        Images--}}
-{{--                        <input type="file" style="display: none" id="files" multiple="true"--}}
-{{--                               x-on:change="files = Object.values($event.target.files)">--}}
-{{--                        --}}{{--                        <div x-text="files? files.map(file => file.name) : 'Choose file'"></div>--}}
-{{--                    </label>--}}
+                    <label x-data="{ thumbnail: null }">
+                        Thumbnail
+                        </br>
+                        <input x-ref="fileUpload" style="display: none" type="file" id="files"
+                               @change="thumbnail = URL.createObjectURL($event.target.files[0]);">
+                        <input style="width: 20%" type="button" value="Browse..." @click="$refs.fileUpload.click()" />
+                        </br>
+                        <img x-show="thumbnail" width="200" height="150" :src="thumbnail"/>
+                    </label>
 
+                    <label>
+                        Price
+                        <input
+                            type="number"
+                            name="price"
+                            placeholder="Price (MDL)"
+                            autocomplete="price"
+                            required
+                        />
+                    </label>
+
+                    <button type="submit">Submit</button>
                 </fieldset>
             </form>
         </article>

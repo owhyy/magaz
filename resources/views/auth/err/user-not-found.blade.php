@@ -6,7 +6,7 @@
                     <h1>Error</h1>
 		    <p>The link is invalid or expired. Try logging in again</p>
 		    </br>
-		    <p><a href="{{ route('main') }}">Go back</a></p>
+		    <p><a href="{{ route('ads.index') }}">Go back</a></p>
                 </hgroup>
             </div>
         </article>

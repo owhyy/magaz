@@ -34,7 +34,7 @@ Route::prefix('auth')->group(function () {
     Route::get('logout', [LoginController::class, 'delete'])->name('logout');
 });
 
-Route::get('/', [AdController::class, 'index'])->name('main');
+Route::get('/', [AdController::class, 'index'])->name('ads.index');
 Route::prefix('ads')->group(function () {
     Route::get('/create', [AdController::class, 'create'])->name('ads.create')->middleware('auth');
     Route::post('/', AdController::class, 'store')->name('ads.store');

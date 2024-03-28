@@ -19,7 +19,7 @@ class LoginController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('main'));
+        return redirect(route('ads.index'));
     }
 
     public function create(): View
@@ -35,7 +35,7 @@ class LoginController extends Controller
             RequestedLogin::dispatch($user);
         }
 
-        return redirect()->route('main')->with('success', 'User created successfuly');
+        return redirect()->route('ads.index')->with('success', 'User created successfuly');
     }
 
     public function delete(Request $request): RedirectResponse
@@ -45,6 +45,6 @@ class LoginController extends Controller
         $request->getSession()->invalidate();
         $request->getSession()->regenerateToken();
 
-        return redirect(route('main'));
+        return redirect(route('ads.index'));
     }
 }

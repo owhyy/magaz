@@ -36,7 +36,7 @@ class RegisterController extends Controller
         }
 
         // also generate some sort of notification (later)
-        return redirect(route('main'));
+        return redirect(route('ads.index'));
     }
 
     public function create(): View

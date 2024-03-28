@@ -1,6 +1,6 @@
 <nav>
     <ul>
-        <li><strong><a href="{{ route('main') }}">MAGAZ</a></strong></li>
+        <li><strong><a href="{{ route('ads.index') }}">MAGAZ</a></strong></li>
     </ul>
     <ul>
 

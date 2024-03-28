@@ -33,7 +33,13 @@ class AdController extends Controller
                 'description' => 'required',
                 'price' => 'required']
         );
-        Ad::create($request->all() + ['user_id' => $request->user()->id]);
+        $thumbnail_file = $request->file('thumbnail');
+        if ($thumbnail_file) {
+            $path = $thumbnail_file->store('thumbnails');
+            $request->merge(['path' => $path])->all();
+        }
+
+        Ad::create($request->merge(['user_id' => $request->user()->id])->all());
         return redirect()->route('ads.index')->with('success', 'Ad created successfuly.');
     }
 

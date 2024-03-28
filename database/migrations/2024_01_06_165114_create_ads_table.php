@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedInteger('views')->default(0);
             $table->longText('description');
             $table->unsignedDecimal('price');
-            $table->binary('thumbnail')->nullable();
+            $table->string('thumbnail')->nullable();
             $table->string('state')->default('active');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
