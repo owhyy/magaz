@@ -21,8 +21,8 @@ class AdController extends Controller
     public function store(Request $request)
     {
         $request->validate(['title' => 'required|max:255',
-                'description' => 'required',
-                'price' => 'required']
+            'description' => 'required',
+            'price' => 'required']
         );
         $thumbnail_file = $request->file('thumbnail');
         if ($thumbnail_file) {
@@ -31,6 +31,7 @@ class AdController extends Controller
         }
 
         Ad::create($request->merge(['user_id' => auth()->user()->id])->all());
+
         return redirect()->route('ads.index')->with('success', 'Ad created successfuly.');
     }
 
@@ -59,6 +60,7 @@ class AdController extends Controller
     public function destroy(Ad $ad)
     {
         $ad->delete();
+
         return redirect()->route('ad.index')
             ->with('success', 'Ad deleted successfully');
     }

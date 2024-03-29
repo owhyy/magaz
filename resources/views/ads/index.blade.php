@@ -11,7 +11,7 @@
             <input type="submit" value="Search"/>
         </form>
     </div>
-    @if(session('success'))
+    @if (session('success'))
         {{-- TODO: display the success message --}}
     @endif
     <div
