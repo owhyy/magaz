@@ -39,10 +39,17 @@ Route::prefix('ads')->group(function () {
     Route::get('/create', [AdController::class, 'create'])->name('ads.create')->middleware('auth');
     Route::post('/', AdController::class, 'store')->name('ads.store');
     Route::get('/{id}', [AdController::class, 'show'])->name('ads.get');
+    Route::get('/{id}/edit', AdController::class . '@edit')->name('ads.edit');
+    Route::put('/{id}', AdController::class . '@update')->name('ads.update');
+    Route::delete('/{id}', AdController::class . '@destroy')->name('ads.destroy');
 });
 
 
-Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit') ->middleware('auth');
-Route::get('profile/{nickname}', [ProfileController::class, 'show'])->name('profile.get');
+Route::prefix('profile')->group(function() {
+    Route::get('/me', ProfileController::class, 'edit')->name('profile.edit')->middleware('auth');
+    Route::put('/me', ProfileController::class, 'update')->name('profile.update')->middleware('auth');
+    Route::get('/{nickname}', ProfileController::class, 'show')->name('profile.get');
+});
+
 
 require __DIR__ . '/auth.php';

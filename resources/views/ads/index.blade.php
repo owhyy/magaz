@@ -18,7 +18,7 @@
         style="display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr; grid-column-gap: 1em; grid-row-gap: 2em;">
         @foreach ( $ads as $ad)
             <a href="{{ route('ads.get', ['id' => $ad->id]) }}" style="text-decoration: none; color: inherit;">
-                <article style="margin-bottom: 0; padding-top: 1em; padding-bottom: 1em; height: 18em;">
+                <article style="margin-bottom: 0; padding-top: 1em; padding-bottom: 1em; height: 18.5em;">
                     <p><b><span style="color: #424751;"> {{ Str::of($ad->title)->limit(20) }}</span> </b></p>
                     <p>
                         {{-- TODO: this is what it should be set to --}}
@@ -28,7 +28,7 @@
                     </p>
                     <p>
                         <span
-                            style="color: #424751;"><i>since {{ $ad->created_at->isSameDay(now()) ? $ad->created_at->format('H:i') : $ad->created_at->format('Y m d') }}</i></span>
+                            style="color: #424751;"><i>posted on {{ $ad->created_at->isSameDay(now()) ? $ad->created_at->format('H:i') : $ad->created_at->format('M d') }}</i></span>
                         </i></span>
                     </p>
                     <p>

@@ -8,25 +8,16 @@ use Illuminate\View\View;
 
 class AdController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return view('ads.index', ['ads' => Ad::all()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('ads.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate(['title' => 'required|max:255',
@@ -39,42 +30,36 @@ class AdController extends Controller
             $request->merge(['path' => $path])->all();
         }
 
-        Ad::create($request->merge(['user_id' => $request->user()->id])->all());
+        Ad::create($request->merge(['user_id' => auth()->user()->id])->all());
         return redirect()->route('ads.index')->with('success', 'Ad created successfuly.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(int $id): View
     {
         $ad = Ad::findOrFail($id);
-        $ad->updateOrFail(['views' => $ad->views + 1]);
+        auth()->user() != $ad->user && $ad->updateOrFail(['views' => $ad->views + 1]);
 
-        return view('ads.get', ['ad' => $ad]);
+        return view('ads.get', compact('ad'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Ad $ad)
     {
-        //
+        return view('ads.edit', compact('ad'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Ad $ad)
+    public function update(Request $request, $ad)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:255',
+            'body' => 'required',
+        ]);
+        $ad->update($request->all());
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Ad $ad)
     {
-        //
+        $ad->delete();
+        return redirect()->route('ad.index')
+            ->with('success', 'Ad deleted successfully');
     }
 }
