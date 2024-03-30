@@ -9,7 +9,8 @@
             {{ $ad->description }}
         </p>
 
-        <div x-data="{lb: null}" x-init="lb = new FsLightbox(); lb.props.sources=['https://picsum.photos/800/600'];" style="max-width: 15em;" >
+        <div x-data="{ lb: null }" x-init="lb = new FsLightbox();
+        lb.props.sources = ['https://picsum.photos/800/600'];" style="max-width: 15em;">
             <image @click="lb.open();" src="https://picsum.photos/800/600"></image>
         </div>
 
@@ -21,7 +22,8 @@
                 @if ($ad->user == $me)
                     Published on {{ $ad->created_at }}
                 @else
-                    Published by <a href="{{ route('profile.get', ['nickname' => $ad->user->nickname]) }}"> {{ $ad->user->nickname }} </a> on {{ $ad->created_at }}
+                    Published by <a href="{{ route('profile.get', ['nickname' => $ad->user->nickname]) }}">
+                        {{ $ad->user->nickname }} </a> on {{ $ad->created_at }}
                 @endif
             </p>
             <p>

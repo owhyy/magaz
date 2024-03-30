@@ -8,31 +8,16 @@
                 </hgroup>
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
-                    <input
-                        type="text"
-                        name="nickname"
-                        placeholder="Nickname"
-                        aria-label="Nickname"
+                    <input type="text" name="nickname" placeholder="Nickname" aria-label="Nickname"
                         aria-invalid="{{ $errors->any() ? ($errors->has('nickname') ? 'true' : 'false') : 'none' }}"
-                        autocomplete="username"
-                        required
-                        value="{{ old('nickname') }}"
-                    />
+                        autocomplete="username" required value="{{ old('nickname') }}" />
                     @if ($errors->has('nickname'))
                         <small id="valid-helper">{{ $errors->get('nickname')[0] }}</small>
                     @endif
 
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        aria-label="Email"
+                    <input type="email" name="email" placeholder="Email" aria-label="Email"
                         aria-invalid="{{ $errors->any() ? ($errors->has('email') ? 'true' : 'false') : 'none' }}"
-                        autocomplete="email"
-                        required
-                        value="{{ old('email') }}"
-                        aria-describedby="valid-helper"
-                    />
+                        autocomplete="email" required value="{{ old('email') }}" aria-describedby="valid-helper" />
                     @if ($errors->has('email'))
                         <small id="valid-helper">{{ $errors->get('email')[0] }}</small>
                     @endif
