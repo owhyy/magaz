@@ -12,13 +12,8 @@ use Illuminate\View\View;
 
 class LoginController extends Controller
 {
-    private User $user;
-    private LoginToken $token;
-
-    public function __construct(User $user, LoginToken $token)
+    public function __construct(private readonly User $user, private readonly LoginToken $token)
     {
-        $this->user = $user;
-        $this->token = $token;
     }
 
     public function index(Request $request): RedirectResponse
