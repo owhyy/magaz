@@ -12,9 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('nickname', 25)->unique();
             $table->string('email')->unique();
-            $table->timestamp('token_generated_at')->nullable();
-            $table->string('token', 256);
-            $table->rememberToken();
+            $table->string('phone_number')->unique();
             $table->timestamps();
         });
     }

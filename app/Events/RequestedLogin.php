@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\LoginToken;
 use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -16,7 +17,7 @@ class RequestedLogin
     /**
      * Create a new event instance.
      */
-    public function __construct(public User $user)
+    public function __construct(public LoginToken $token)
     {
         //
     }

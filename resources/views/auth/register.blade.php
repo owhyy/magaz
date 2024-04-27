@@ -22,6 +22,13 @@
                         <small id="valid-helper">{{ $errors->get('email')[0] }}</small>
                     @endif
 
+                    <input type="number" name="phone_number" placeholder="Phone number" aria-label="Phone"
+                           aria-invalid="{{ $errors->any() ? ($errors->has('phone_number') ? 'true' : 'false') : 'none' }}"
+                           required value="{{ old('phone_number') }}" aria-describedby="valid-helper" />
+                    @if ($errors->has('phone_number'))
+                        <small id="valid-helper">{{ $errors->get('phone_number')[0] }}</small>
+                    @endif
+
                     <button type="submit">Create account</button>
 
                 </form>

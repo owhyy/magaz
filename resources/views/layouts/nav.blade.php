@@ -4,18 +4,16 @@
     </ul>
     <ul>
 
-        @if (Auth::check())
-            <li><a href="{{ route('profile.edit') }}"></a></li>
+        @if (auth()->check())
             <li>
                 <details class="dropdown">
                     <summary>
-                        {{ Auth::user()->nickname }}
+                        {{ auth()->user()->nickname }}
                     </summary>
                     <ul dir="rtl">
-                        <li><a href="{{ route('ads.create') }}">Add a product</a></li>
-			<li><a href="{{ route('profile.edit') }}">Manage profile</a></li>
-                        <li><a href="{{ route('logout') }}">Log out</a></li>
                         <li><a href="{{ route('ads.create') }}">Submit an ad</a></li>
+                        <li><a href="{{ route('profile.edit') }}">Manage profile</a></li>
+                        <li><a href="{{ route('logout') }}">Log out</a></li>
                     </ul>
                 </details>
             </li>
