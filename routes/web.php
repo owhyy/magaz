@@ -38,8 +38,10 @@ Route::prefix('auth')->group(function() {
 
 Route::get('/', [AdController::class, 'index'])->name("main");
 Route::prefix('ads')->group(function() {
+    Route::get('/create', AdController::class .'@create')->name('ads.create');
     Route::get('/{id}', [AdController::class, 'show'])->name('ads.get');
 });
+Route::post('ads/', AdController::class .'@store')->name('ads.store');
 
 Route::middleware('auth')->group(function() {
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');

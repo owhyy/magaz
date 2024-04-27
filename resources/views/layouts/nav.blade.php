@@ -12,6 +12,7 @@
 			{{ Auth::user()->nickname }}
 		    </summary>
 		    <ul dir="rtl">
+			<li><a href="{{ route('ads.create') }}">Add a product</a></li>
 			<li><a href="{{ route('profile.edit') }}">Manage profile</a></li>
 			<li><a href="{{ route('logout') }}">Log out</a></li>
 		    </ul>
