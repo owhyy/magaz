@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\LoginToken;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -19,7 +18,7 @@ class LoginController extends Controller
     public function index(Request $request): RedirectResponse
     {
         $token = $this->token->whereValue($request->token)->firstOrFail();
-        if ($token->valid_until < Carbon::now()) {
+        if ($token->valid_until < now()) {
             return $this->redirectHome()->withErrors(['message' => 'Auth link has expired. Create a new one']);
         }
 

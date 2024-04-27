@@ -8,13 +8,12 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    public function __construct(private readonly User $user) {}
+
     public function show(string $nickname): View
     {
-        $user = User::whereNickname($nickname)->firstOrFail();
-
-        return view('profile.get', [
-            'user' => $user,
-        ]);
+        $user = $this->user->whereNickname($nickname)->firstOrFail();
+        return view('profile.get', compact('user'));
     }
 
     public function edit(Request $request): View

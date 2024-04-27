@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\RegisterRequest;
+use App\Http\Requests\Register\StoreRequest;
 use App\Models\LoginToken;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -15,7 +15,7 @@ class RegisterController extends Controller
     {
     }
 
-    public function store(RegisterRequest $request): RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
         // check if email is unique,
         // but don't display any error message to avoid phishing

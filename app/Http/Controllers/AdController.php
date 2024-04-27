@@ -2,66 +2,74 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Ad\StoreRequest;
+use App\Http\Requests\Ad\UpdateRequest;
 use App\Models\Ad;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class AdController extends Controller
 {
-    public function index()
+    public function __construct(private readonly Ad $ad)
     {
-        return view('ads.index', ['ads' => Ad::all()]);
     }
 
-    public function create()
+    public function index(): View
+    {
+        return view('ads.index', ['ads' => $this->ad->all()]);
+    }
+
+    public function create(): View
     {
         return view('ads.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request): RedirectResponse
     {
-        $request->validate(['title' => 'required|max:255',
-            'description' => 'required',
-            'price' => 'required']
-        );
+        $data = $request->validated() + ['user_id' => auth()->user()->id];
         $thumbnail_file = $request->file('thumbnail');
+
         if ($thumbnail_file) {
             $path = $thumbnail_file->store('thumbnails');
-            $request->merge(['path' => $path])->all();
+            $data += ['path' => $path];
         }
 
-        Ad::create($request->merge(['user_id' => auth()->user()->id])->all());
+        $this->ad->create($data);
 
-        return redirect()->route('ads.index')->with('success', 'Ad created successfuly.');
+        return redirect()->route('ads.index')->withSuccess('Ad created successfuly.');
     }
 
     public function show(int $id): View
     {
-        $ad = Ad::findOrFail($id);
-        auth()->user() != $ad->user && $ad->updateOrFail(['views' => $ad->views + 1]);
+        $ad = $this->ad->findOrFail($id);
+        if (auth()->user() != $ad->user) {
+            $ad->updateOrFail(['views' => $ad->views + 1]);
+        }
 
-        return view('ads.get', ['ad' => $ad]);
+        return view('ads.get', compact('ad'));
     }
 
-    public function edit(Ad $ad)
+    public function edit(Ad $ad): View
     {
-        return view('ads.edit', ['ad' => $ad]);
+        return view('ads.edit', compact('ad'));
     }
 
-    public function update(Request $request, $ad)
+    public function update(UpdateRequest $request, Ad $ad): RedirectResponse
     {
-        $request->validate([
-            'title' => 'required|max:255',
-            'body' => 'required',
-        ]);
-        $ad->update($request->all());
+        $ad->update($request->validated());
+        return $this->redirectHome()->withSuccess('Ad updated successfuly.');
     }
 
-    public function destroy(Ad $ad)
+    public function destroy(Ad $ad): RedirectResponse
     {
         $ad->delete();
 
-        return redirect()->route('ads.index')
+        return $this->redirectHome()
             ->with('success', 'Ad deleted successfully');
+    }
+
+    private function redirectHome()
+    {
+        return redirect()->route('ads.index');
     }
 }

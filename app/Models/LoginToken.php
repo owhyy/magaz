@@ -3,11 +3,9 @@
 namespace App\Models;
 
 use App\Events\RequestedLogin;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LoginToken extends Model
 {
@@ -25,7 +23,7 @@ class LoginToken extends Model
 
     public function createdToday(string $email): Collection
     {
-        return $this->whereEmail($email)->whereCreatedAtDay(Carbon::now()->day);
+        return $this->whereEmail($email)->whereCreatedAtDay(now()->day);
     }
 
     public function canCreateToday(string $email): bool
@@ -35,6 +33,6 @@ class LoginToken extends Model
 
     public function invalidateAllOthers(string $email): null
     {
-        return $this->whereEmail($email)->update(['valid_until' => Carbon::now()]);
+        return $this->whereEmail($email)->update(['valid_until' => now()]);
     }
 }
