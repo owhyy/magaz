@@ -46,7 +46,7 @@ class AdController extends Controller
             $ad->updateOrFail(['views' => $ad->views + 1]);
         }
 
-        return view('ads.get', ['ad' => $ad]);
+        return view('ads.show', ['ad' => $ad]);
     }
 
     public function edit(Ad $ad): View

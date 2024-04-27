@@ -1,4 +1,4 @@
-<nav>
+<nav style="padding-top: 1em;">
     <ul>
         <li><strong><a href="{{ route('ads.index') }}">MAGAZ</a></strong></li>
     </ul>

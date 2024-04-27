@@ -1,4 +1,3 @@
-@php($me = Auth::user())
 <x-app-layout>
     <article>
         <header>
@@ -16,10 +15,10 @@
 
         <footer>
             <p>
-                <b> {{ $ad->price }} MDL </b>
+                <b> {{ $ad->price }}$ </b>
             </p>
             <p>
-                @if ($ad->user == $me)
+                @if ($ad->user == auth()->user())
                     Published on {{ $ad->created_at }}
                 @else
                     Published by <a href="{{ route('profile.get', ['nickname' => $ad->user->nickname]) }}">

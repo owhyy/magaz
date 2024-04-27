@@ -9,11 +9,11 @@
             </header>
 
             <h4>User's ads</h4>
-            </br>
+            <br/>
             <div
                 style="display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr; grid-column-gap: 1em; grid-row-gap: 2em;">
                 @foreach ($user->ads as $ad)
-                    @include('layouts.ad-card', ['ad' => $ad])
+                    @include('ads.partials.card', ['ad' => $ad])
                 @endforeach
             </div>
         </article>
