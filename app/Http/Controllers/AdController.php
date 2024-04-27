@@ -57,6 +57,7 @@ class AdController extends Controller
     public function update(UpdateRequest $request, Ad $ad): RedirectResponse
     {
         $ad->update($request->validated());
+
         return $this->redirectHome()->withSuccess('Ad updated successfuly.');
     }
 
