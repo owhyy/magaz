@@ -23,7 +23,7 @@ class RegisterController extends Controller
     {
         // check if email is unique,
         // but don't display any error message to avoid phishing
-        if (!$this->user->whereEmail($request->validated()["email"])->exists()) {
+        if (! $this->user->whereEmail($request->validated()['email'])->exists()) {
             $this->user->create($request->validated() +
                 [
                     'token' => Str::random(40),

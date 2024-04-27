@@ -13,7 +13,8 @@ class LoginController extends Controller
 {
     private User $user;
 
-    public function __construct(User $user) {
+    public function __construct(User $user)
+    {
         $this->user = $user;
     }
 
@@ -21,6 +22,7 @@ class LoginController extends Controller
     {
         $userWithToken = $this->user->whereToken($request->token)->firstOrFail();
         auth()->login($userWithToken);
+
         return $this->redirectHome();
     }
 
@@ -44,6 +46,7 @@ class LoginController extends Controller
     {
         auth()->logout();
         $request->getSession()->invalidate();
+
         return $this->redirectHome();
     }
 
