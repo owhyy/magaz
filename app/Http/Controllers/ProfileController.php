@@ -13,7 +13,7 @@ class ProfileController extends Controller
     public function show(string $nickname): View
     {
         $user = $this->user->whereNickname($nickname)->firstOrFail();
-        return view('profile.get', compact('user'));
+        return view('profile.get', ['user' => $user]);
     }
 
     public function edit(Request $request): View

@@ -46,12 +46,12 @@ class AdController extends Controller
             $ad->updateOrFail(['views' => $ad->views + 1]);
         }
 
-        return view('ads.get', compact('ad'));
+        return view('ads.get', ['ad' => $ad]);
     }
 
     public function edit(Ad $ad): View
     {
-        return view('ads.edit', compact('ad'));
+        return view('ads.edit', ['ad' => $ad]);
     }
 
     public function update(UpdateRequest $request, Ad $ad): RedirectResponse
