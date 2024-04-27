@@ -61,7 +61,7 @@ class AdController extends Controller
     {
         $ad->delete();
 
-        return redirect()->route('ad.index')
+        return redirect()->route('ads.index')
             ->with('success', 'Ad deleted successfully');
     }
 }

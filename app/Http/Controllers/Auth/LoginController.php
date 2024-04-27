@@ -43,7 +43,6 @@ class LoginController extends Controller
         Auth::logout();
 
         $request->getSession()->invalidate();
-        $request->getSession()->regenerateToken();
 
         return redirect(route('ads.index'));
     }

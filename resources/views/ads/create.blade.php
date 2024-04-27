@@ -28,7 +28,7 @@
                     </label>
                     <label x-data="{ thumbnail: null }">
                         Thumbnail
-                        </br>
+                        <br/>
                         <input x-ref="fileUpload" style="display: none" type="file" id="files"
                             @change="thumbnail = URL.createObjectURL($event.target.files[0]);">
                         <input style="width: 20%" type="button" value="Browse..." @click="$refs.fileUpload.click()" />

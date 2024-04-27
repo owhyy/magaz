@@ -1,4 +1,4 @@
-<a href="{{ route('ads.get', ['id' => $ad->id]) }}" style="text-decoration: none; color: inherit;">
+<a href="{{ route('ads.show', ['id' => $ad->id]) }}" style="text-decoration: none; color: inherit;">
     <article style="margin-bottom: 0; padding-top: 1em; padding-bottom: 1em; height: 18.5em;">
         <p><b><span style="color: #424751;"> {{ Str::of($ad->title)->limit(20) }}</span> </b></p>
         <p>
