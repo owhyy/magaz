@@ -6,7 +6,6 @@ use App\Events\RequestedLogin;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 class LoginToken extends Model
 {
     use HasFactory;
@@ -21,6 +20,16 @@ class LoginToken extends Model
         'created' => RequestedLogin::class,
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($table)
+        {
+            $table->value = str()->random(40);
+            $table->valid_until = now()->addHours(config('constants.login_token_lifespan_days'));
+        });
+    }
     public function createdToday(string $email): Collection
     {
         return $this->whereEmail($email)->whereCreatedAtDay(now()->day)->get();
