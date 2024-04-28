@@ -21,6 +21,7 @@ class SendLoginLink implements ShouldQueue
      */
     public function handle(RequestedLogin $event): void
     {
-        $event->token->notify(new UserRequestedLogin($this->user->whereEmail($event->token->email)));
+        $user = $this->user->whereEmail($event->token->email);
+        $user->notify(new UserRequestedLogin($user));
     }
 }
