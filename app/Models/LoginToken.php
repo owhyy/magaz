@@ -23,7 +23,7 @@ class LoginToken extends Model
 
     public function createdToday(string $email): Collection
     {
-        return $this->whereEmail($email)->whereCreatedAtDay(now()->day);
+        return $this->whereEmail($email)->whereCreatedAtDay(now()->day)->get();
     }
 
     public function canCreateToday(string $email): bool
