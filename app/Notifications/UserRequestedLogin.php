@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\LoginToken;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -14,7 +15,7 @@ class UserRequestedLogin extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct(public User $user)
+    public function __construct(public User $user, public LoginToken $token)
     {
         //
     }
@@ -37,7 +38,7 @@ class UserRequestedLogin extends Notification
         return (new MailMessage)
             ->subject('Login link!')
             ->greeting("Hi {$this->user->nickname}, please use the link below to log in.")
-            ->line(route('login.do', ['token' => $this->user->token]))
+            ->line(route('login.do', ['token' => $this->token->value]))
             ->line('Thank you for using our application!');
     }
 

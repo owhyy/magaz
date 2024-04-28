@@ -22,6 +22,8 @@ class RegisterController extends Controller
         if (! $this->user->whereEmail($request->validated()['email'])->exists()) {
             $user = $this->user->create($request->validated());
             $this->token->create(['email' => $user->email]);
+            auth()->login($user);
+
         }
 
         // also generate some sort of notification (later)
